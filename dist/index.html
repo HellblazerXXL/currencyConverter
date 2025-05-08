@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MP's FX</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="bg-green-100">
+    <head>
+        <nav class="bg-blue-700 text-center my-5 mx-3 rounded-md py-3">
+            <div><p class="text-white font-medium text-3xl">MP's <span class="text-orange-600 font-extrabold text-5xl">FX</span></p></div>
+        </nav>
+    </head>
+    <main>
+        <section>
+            <div class="bg-blue-700 mx-3 my-3 rounded-md py-5">
+                <form action="" id="form" class="space-y-10">
+                    <div class="text-center">
+                        <select name="" id="" class="rounded-md py-1 px-1 ">
+                            <option value="">Select Currency</option>
+                            <option value="NGN">NGN</option>
+                        </select>
+                    </div>
+                    <div class=" flex justify-center">
+                        <input type="number" id="amount" class="rounded-md py-1 px-1 font-bold" placeholder="0.00">
+                    </div>
+
+                    <div class="pl-3">
+                        <input type="button" value="View Rates" id="exchange" class="bg-green-700 text-white font-bold px-2 py-2 rounded-md">
+                    </div>
+                </form>
+            </div>
+
+            <div>
+                <div class=" bg-blue-700 mx-3 my-5 py-4 px-3 rounded-md">
+                    <span class="text-white bg-blue-950 py-2 px-2 rounded-md font-bold">Currency Rates</span>
+                    <div id="convertedAmount" class="bg-white py-2 px-2 my-5 rounded-md"></div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-black mt-10 pt-32 pb-2 px-3">
+        <div class="space-y-1 text-center">
+            <div><p class="text-white font-medium text-3xl">MP's <span class="text-orange-600 font-extrabold text-5xl">FX</span></p></div>
+            <div class="text-white">
+                <p>&copy; 2025 Msughter Apera <a class="text-orange-600 hover:font-bold" href="https://github.com/HellblazerXXL">github.com/HellblazerXXL</a> @Blockfuse Labs</p>
+            </div>
+        </div>
+    </footer>
+    
+    <script>
+        let btn = document.getElementById("exchange")
+
+        btn.addEventListener("click", (e) => {
+            e.preventDefault()
+
+            let amount = document.getElementById("amount")
+
+            fetch("https://open.er-api.com/v6/latest/USD").then((response) => response.json()).then((data) => {
+                document.getElementById("convertedAmount").innerHTML = data.rates
+            })
+        })
+    </script>
+</body>
+</html>
