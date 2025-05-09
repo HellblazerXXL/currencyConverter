@@ -581,10 +581,6 @@ video {
   display: flex;
 }
 
-.hidden {
-  display: none;
-}
-
 .justify-center {
   justify-content: center;
 }
