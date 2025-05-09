@@ -28,8 +28,7 @@
                         </select>
                     </div>
                     <div class=" flex justify-center">
-                        <input type="number" id="amount" class="rounded-md py-1 px-1 font-bold" placeholder="0.00"
-                            autofocus>
+                        <input type="number" id="amount" class="rounded-md py-1 px-1 font-bold" placeholder="0.00">
 
                     </div>
                     <div id="amountError" class="bg-red-600 text-white text-right mx-3 rounded-md px-2"></div>
@@ -67,19 +66,19 @@
     </footer>
 
     <script>
-           fetch("https://open.er-api.com/v6/latest/USD").then((response) => response.json()).then((data) => {
-            let currencies = Object.keys(data.rates);
+        //    fetch("https://open.er-api.com/v6/latest/USD").then((response) => response.json()).then((data) => {
+        //     let currencies = Object.keys(data.rates);
 
-            currencies.forEach((currency) => {
-                let option = document.createElement("option");
-                option.value = currency;
-                option.innerText = currency;
+        //     currencies.forEach((currency) => {
+        //         let option = document.createElement("option");
+        //         option.value = currency;
+        //         option.innerText = currency;
 
-                document.querySelector("#currency").appendChild(option)
-            });
+        //         document.querySelector("#currency").appendChild(option)
+        //     });
 
 
-        });
+        // });
 
 
         let btn = document.getElementById("exchange");
@@ -99,12 +98,18 @@
                 document.getElementById("dollar").innerText = `$${amount}`;
                 document.getElementById("convertedAmount").innerText = `₦${data.rates.NGN * amount}`;
                 //document.getElementById("convertedAmount").innerText = data.rates[`${currency}`]*amount;
+                let currency = document.querySelector("#currency").value;
 
+                let currencies = Object.keys(data.rates);
 
+                currencies.forEach((curr) => {
+                    if(currency == curr) {
+                        document.getElementById("convertedAmount").innerText = `₦${data.rates[curr] * amount}`;
+                    }
+                    
+                });
 
             })
-
-
 
             if (document.getElementById("amount").value === "") {
                 e.preventDefault();
@@ -112,24 +117,29 @@
             }
             else (amountError.innerHTML = "")
 
+
         })
 
+        fetch("https://open.er-api.com/v6/latest/USD").then((response) => response.json()).then((data) => {
+            let currencies = Object.keys(data.rates);
 
+            currencies.forEach((currency) => {
+                let option = document.createElement("option");
+                option.value = currency;
+                option.innerText = currency;
 
-        // fetch("https://open.er-api.com/v6/latest/USD").then((response) => response.json()).then((data) => {
-        //     let currencies = Object.key(data.rates);
+                document.querySelector("#currency").appendChild(option)
+            });
 
-        //     currencies.forEach((currency) => {
-        //         let option = document.createElement("option");
-        //         option.value = currency;
-        //         option.innerText = currency;
+        });
 
-        //         document.querySelector("#currency").appendChild(option)
-        //     });
+        // let amount = document.getElementById("amount");
 
-
-        // });
-
+        // amount.addEventListener('click', (e) => {
+        //     e.preventDefault();
+        //     let btnEX = document.querySelectorAll("#exchange");
+        //     btnEX.style.display = "block";
+        // }) 
 
 
 

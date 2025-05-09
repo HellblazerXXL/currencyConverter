@@ -573,8 +573,16 @@ video {
   margin-top: 2.5rem;
 }
 
+.block {
+  display: block;
+}
+
 .flex {
   display: flex;
+}
+
+.hidden {
+  display: none;
 }
 
 .justify-center {
@@ -601,10 +609,6 @@ video {
 
 .rounded-md {
   border-radius: 0.375rem;
-}
-
-.rounded {
-  border-radius: 0.25rem;
 }
 
 .bg-black {
