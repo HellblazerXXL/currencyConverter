@@ -1,15 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MP's FX</title>
     <link rel="stylesheet" href="style.css">
 </head>
+
 <body class="bg-green-100">
+
     <head>
         <nav class="bg-blue-700 text-center my-5 mx-3 rounded-md py-3">
-            <div><p class="text-white font-medium text-3xl">MP's <span class="text-orange-600 font-extrabold text-5xl">FX</span></p></div>
+            <div>
+                <p class="text-white font-medium text-3xl">MP's <span
+                        class="text-orange-600 font-extrabold text-5xl">FX</span></p>
+            </div>
         </nav>
     </head>
     <main>
@@ -17,43 +23,65 @@
             <div class="bg-blue-700 mx-3 my-3 rounded-md py-5">
                 <form action="" id="form" class="space-y-10">
                     <div class="text-center">
-                        <!-- <select name="" id=" currency" class="rounded-md py-1 px-1 ">
-                            
-                        </select> -->
+                        <select name="" id="currency" class="rounded-md py-1 px-1 ">
+
+                        </select>
                     </div>
                     <div class=" flex justify-center">
-                        <input type="number" id="amount" class="rounded-md py-1 px-1 font-bold" placeholder="0.00" autofocus>
-                        
+                        <input type="number" id="amount" class="rounded-md py-1 px-1 font-bold" placeholder="0.00"
+                            autofocus>
+
                     </div>
                     <div id="amountError" class="bg-red-600 text-white text-right mx-3 rounded-md px-2"></div>
 
                     <div class="pl-3">
-                        <input type="button" value="View Rates" id="exchange" class="bg-green-700 text-white font-bold px-2 py-2 rounded-md">
-                        <input type="reset" value="Reset" id="exchange" class="bg-red-600 text-white font-bold px-8 py-2 rounded-md">
+                        <input type="button" value="View Rates" id="exchange"
+                            class="bg-green-700 text-white font-bold px-2 py-2 rounded-md">
+                        <input type="reset" value="Reset" id="exchange"
+                            class="bg-red-600 text-white font-bold px-8 py-2 rounded-md">
                     </div>
                 </form>
             </div>
 
-                <div class=" bg-blue-700 mx-3 my-5 py-4 px-3 rounded-md space-y-3">
-                    <span class="text-white bg-blue-950 py-2 px-2 rounded-md font-bold">Currency Rates</span>
-                    <p class="text-white">From :</p>
-                    <div id="dollar" class="bg-white py-2 px-2 my-5 rounded-md"></div>
-                    <span class="text-white">To:</span>
-                    <div id="convertedAmount" class="bg-white py-2 px-2 my-5 rounded-md"></div>
-                </div>
+            <div class=" bg-blue-700 mx-3 my-5 py-4 px-3 rounded-md space-y-3">
+                <span class="text-white bg-blue-950 py-2 px-2 rounded-md font-bold">Currency Rates</span>
+                <p class="text-white">From :</p>
+                <div id="dollar" class="bg-white py-2 px-2 my-5 rounded-md"></div>
+                <span class="text-white">To:</span>
+                <div id="convertedAmount" class="bg-white py-2 px-2 my-5 rounded-md"></div>
+            </div>
         </section>
     </main>
 
     <footer class="bg-black mt-10 pt-32 pb-2 px-3">
         <div class="space-y-1 text-center">
-            <div><p class="text-white font-medium text-3xl">MP's <span class="text-orange-600 font-extrabold text-5xl">FX</span></p></div>
+            <div>
+                <p class="text-white font-medium text-3xl">MP's <span
+                        class="text-orange-600 font-extrabold text-5xl">FX</span></p>
+            </div>
             <div class="text-white">
-                <p>&copy; 2025 Msughter Apera <a class="text-orange-600 hover:font-bold" href="https://github.com/HellblazerXXL">github.com/HellblazerXXL</a> @Blockfuse Labs</p>
+                <p>&copy; 2025 Msughter Apera <a class="text-orange-600 hover:font-bold"
+                        href="https://github.com/HellblazerXXL">github.com/HellblazerXXL</a> @Blockfuse Labs</p>
             </div>
         </div>
     </footer>
-    
+
     <script>
+           fetch("https://open.er-api.com/v6/latest/USD").then((response) => response.json()).then((data) => {
+            let currencies = Object.keys(data.rates);
+
+            currencies.forEach((currency) => {
+                let option = document.createElement("option");
+                option.value = currency;
+                option.innerText = currency;
+
+                document.querySelector("#currency").appendChild(option)
+            });
+
+
+        });
+
+
         let btn = document.getElementById("exchange");
 
         let amountError = document.getElementById("amountError");
@@ -63,51 +91,52 @@
             e.preventDefault();
 
             let amount = document.getElementById("amount").value;
-            // let currency = document.querySelector("#currency").value;
-           
-            
+            let currency = document.querySelector("#currency");
+
+
 
             fetch("https://open.er-api.com/v6/latest/USD").then((response) => response.json()).then((data) => {
                 document.getElementById("dollar").innerText = `$${amount}`;
-                document.getElementById("convertedAmount").innerText = `₦${data.rates.NGN*amount}`;
+                document.getElementById("convertedAmount").innerText = `₦${data.rates.NGN * amount}`;
                 //document.getElementById("convertedAmount").innerText = data.rates[`${currency}`]*amount;
 
 
-                
+
             })
 
 
-            
+
             if (document.getElementById("amount").value === "") {
                 e.preventDefault();
                 amountError.innerHTML = ("<p>Please enter amount</p>")
             }
-            else(amountError.innerHTML = "")
-        
+            else (amountError.innerHTML = "")
+
         })
 
 
 
         // fetch("https://open.er-api.com/v6/latest/USD").then((response) => response.json()).then((data) => {
-        //         let currencies = Object.key(data.rates);
+        //     let currencies = Object.key(data.rates);
 
-        //         currencies.forEach((currency) => {
-        //             let option = document.createElement("option");
-        //             option.value = currency;
-        //             option.innerText = currency;
+        //     currencies.forEach((currency) => {
+        //         let option = document.createElement("option");
+        //         option.value = currency;
+        //         option.innerText = currency;
 
-        //             document.querySelector("#currency").appendChild(option)
-        //         });
+        //         document.querySelector("#currency").appendChild(option)
+        //     });
 
-                
+
         // });
 
-       
-
-        
 
 
-      
+
+
+
+
     </script>
 </body>
+
 </html>
