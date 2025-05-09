@@ -28,7 +28,8 @@
                         </select>
                     </div>
                     <div class=" flex justify-center">
-                        <input type="number" id="amount" class="rounded-md py-1 px-1 font-bold" placeholder="0.00">
+                        <input type="number" id="amount" class="rounded-md py-1 px-1 font-bold" placeholder="0.00"
+                            autofocus>
 
                     </div>
                     <div id="amountError" class="bg-red-600 text-white text-right mx-3 rounded-md px-2"></div>
@@ -104,7 +105,7 @@
 
                 currencies.forEach((curr) => {
                     if(currency == curr) {
-                        document.getElementById("convertedAmount").innerText = `₦${data.rates[curr] * amount}`;
+                        document.getElementById("convertedAmount").innerText = `₦ ${data.rates[curr] * amount}`;
                     }
                     
                 });
@@ -132,14 +133,6 @@
             });
 
         });
-
-        // let amount = document.getElementById("amount");
-
-        // amount.addEventListener('click', (e) => {
-        //     e.preventDefault();
-        //     let btnEX = document.querySelectorAll("#exchange");
-        //     btnEX.style.display = "block";
-        // }) 
 
 
 
